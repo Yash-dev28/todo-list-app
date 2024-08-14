@@ -1,68 +1,52 @@
+import React, { useState } from 'react';
+import "./Login.css";
+import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
 import { auth } from "./firebase";
-import { toast } from "react-toastify";
-import SignInwithGoogle from "./signInWithGoogle";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      console.log("User logged in Successfully");
-      window.location.href = "/ToDoList";
-      toast.success("User logged in Successfully", {
-        position: "top-center",
-      });
-    } catch (error) {
-      console.log(error.message);
+    const signInUser = () => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((value) => {
+                alert("You are successfully logged in");
+                setEmail("");  // Reset email
+                setPassword("");  // Reset password
+                navigate("/todoList");  // Navigate to TodoList
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Login failed: " + err.message);
+            });
+    };
 
-      toast.error(error.message, {
-        position: "bottom-center",
-      });
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <h3>Login</h3>
-
-      <div className="mb-3">
-        <label>Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-
-      <div className="mb-3">
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-
-      <div className="d-grid">
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </div>
-      <p className="forgot-password text-right">
-        New user <a href="/register">Register Here</a>
-      </p>
-      <SignInwithGoogle/>
-    </form>
-  );
+    return (
+        <div className="sign-in-container">
+            <div className='sign-in'>
+                <h1>Login Page</h1>
+                <label>Email</label>
+                <input 
+                    type='email'
+                    placeholder='Enter your email'
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    required
+                />
+                <label>Password</label>
+                <input 
+                    type='password' 
+                    placeholder='Enter your password'
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    required
+                />
+                <button onClick={signInUser}>Login</button>
+            </div>
+        </div>
+    );
 }
 
 export default Login;

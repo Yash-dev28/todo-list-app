@@ -1,0 +1,70 @@
+*{
+  justify-content: center;
+  
+}
+.flex {
+  display: flex;
+  justify-content: center; /* Centers the entire TodoList component */
+  padding: 20px; /* Adds space around the main component */
+  border-radius: 5px;
+}
+
+.bg-zinc-800 {
+  background-color: #f9c3c3;
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  max-width: 1200px; /* Limits the width for better readability */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+}
+
+.bg-zinc-600 {
+  background-color: #f9c3c3;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px; /* Adds space between lists */
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+  gap: 20px; /* Space between list items */
+}
+
+input, select {
+  margin-bottom: 15px; /* Adds space between input fields */
+  width: calc(100% - 30px); /* Ensures inputs fill the container with space for padding */
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1.2em;
+  line-height: 40px;
+}
+
+button {
+  margin-top: 10px; /* Adds space above buttons */
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1.2em;
+  line-height: 40px;
+}
+
+.droppable {
+  background-color: #eaeaea;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px; /* Space between droppable sections */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.draggable {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px; /* Space between tasks */
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.draggable.is-dragging {
+  background-color: #cccccc;
+  transform: scale(1.05);
+}
